@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /home/sajitha/Development/valista-packaging status --porcelain)"
+    ]
+  }
+}

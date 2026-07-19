@@ -282,6 +282,17 @@
     z-index:-1;
     border-radius:50%;
   }
+  .hero-caption{
+    position:absolute;
+    left:20px;
+    bottom:-18px;
+    background:var(--paper-alt);
+    border:1px solid var(--kraft-border);
+    border-radius:var(--radius-sm);
+    padding:10px 16px;
+    box-shadow:var(--shadow-md);
+  }
+  .hero-caption .eyebrow{font-size:11px;}
 
   /* ---------- MARQUEE ---------- */
   .marquee-wrap{
@@ -294,7 +305,7 @@
   .marquee-track{
     display:inline-flex;
     align-items:center;
-    animation:scroll-left 32s linear infinite;
+    animation:scroll-left 60s linear infinite;
   }
   .marquee-track span{
     display:inline-flex;
@@ -340,66 +351,93 @@
   }
   .reveal.in{opacity:1;transform:translateY(0);}
 
-  /* ---------- ABOUT ---------- */
-  .about{background:var(--paper-alt);}
-  .about-grid{
+  /* ---------- SPLIT (IMAGE + COPY) LAYOUT ---------- */
+  .split-grid{
     display:grid;
     grid-template-columns:1fr;
     gap:48px;
     align-items:center;
   }
   @media(min-width:1024px){
-    .about-grid{grid-template-columns:0.85fr 1.15fr;gap:64px;}
+    .split-grid{grid-template-columns:1.15fr 0.85fr;gap:64px;}
+    .split-grid.reverse{grid-template-columns:0.85fr 1.15fr;}
+    .split-grid.reverse .split-art{order:-1;}
   }
-  .about-art{
-    position:relative;
-    border-radius:var(--radius-lg);
-    background:var(--kraft-tan);
-    padding:36px;
-    aspect-ratio:1/1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-  }
-  .about-art svg{width:78%;height:auto;}
-  .about-art::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:repeating-linear-gradient(-45deg, rgba(34,31,28,0.035) 0 2px, transparent 2px 14px);
-  }
-  .about-copy p{
+  .split-art .img-placeholder{width:100%;}
+  .split-copy p{
     font-size:16px;
     line-height:1.75;
     color:var(--muted);
     margin-top:18px;
   }
-  .about-copy p:first-of-type{margin-top:20px;}
-  .about-stats{
+  .split-copy p:first-of-type{margin-top:20px;}
+  .split-copy .btn{margin-top:28px;}
+
+  .facility{background:var(--paper-alt);}
+  .fleet{background:var(--paper);border-bottom:1px solid var(--kraft-border);}
+
+  /* ---------- INDUSTRY GRID ---------- */
+  .industries{background:var(--paper);}
+  .industry-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:1px;
-    background:var(--kraft-border);
+    gap:16px;
+  }
+  @media(min-width:768px){
+    .industry-grid{grid-template-columns:repeat(4,1fr);gap:18px;}
+  }
+  .industry-card{
+    background:var(--paper-alt);
     border:1px solid var(--kraft-border);
     border-radius:var(--radius-md);
-    overflow:hidden;
-    margin-top:32px;
+    padding:28px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    text-align:center;
+    transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
   }
-  .about-stats div{
-    background:var(--paper-alt);
-    padding:20px;
+  .industry-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-md);
+    border-color:transparent;
   }
-  .about-stats h4{
-    font-size:14.5px;
-    color:var(--ink);
+  .industry-icon{
+    width:48px;height:48px;
+    border-radius:50%;
+    background:var(--green-tint);
+    display:flex;align-items:center;justify-content:center;
   }
-  .about-stats p{
-    font-size:13px;
-    color:var(--muted);
-    margin-top:6px;
-    line-height:1.5;
+  .industry-icon svg{width:24px;height:24px;color:var(--green-deep);}
+  .industry-label{font-size:14.5px;font-weight:700;color:var(--ink);}
+
+  /* ---------- SPEC SHEET ---------- */
+  .spec{background:var(--paper-alt);}
+  .spec-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
   }
+  @media(min-width:1024px){
+    .spec-grid{grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start;}
+  }
+  .spec-copy p{margin-top:18px;font-size:16px;line-height:1.7;color:var(--muted);}
+  .spec-list{margin-top:26px;display:flex;flex-direction:column;gap:14px;}
+  .spec-list li{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--muted);line-height:1.6;}
+  .spec-list li svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;color:var(--green-deep);}
+  .spec-card{
+    background:var(--paper);
+    border:1px solid var(--kraft-border);
+    border-radius:var(--radius-md);
+    padding:30px;
+    box-shadow:var(--shadow-sm);
+  }
+  .spec-table{margin-top:16px;width:100%;border-collapse:collapse;}
+  .spec-table tr{border-top:1px solid var(--kraft-border);}
+  .spec-table tr:first-child{border-top:none;}
+  .spec-table td{padding:14px 0;font-size:14.5px;color:var(--muted);}
+  .spec-table td:last-child{text-align:right;font-weight:700;color:var(--ink);}
 
   /* ---------- PRODUCTS (BENTO) ---------- */
   .products{background:var(--paper);}
@@ -742,7 +780,7 @@
     text-align:center;
   }
   @media(min-width:768px){
-    .stats-grid{grid-template-columns:repeat(3,1fr);gap:24px;}
+    .stats-grid{grid-template-columns:repeat(4,1fr);gap:24px;}
   }
   .stat h3{
     font-family:'Outfit',sans-serif;
@@ -849,7 +887,7 @@
   .blog-article{padding:56px 0 88px;}
   .blog-article .lead{margin-top:16px;font-size:18px;color:var(--muted);max-width:720px;}
   .blog-article .img-placeholder{margin-top:32px;}
-  .article-body{max-width:720px;margin-top:36px;}
+  .article-body{max-width:100%;margin-top:36px;}
   .article-body p{margin-bottom:20px;line-height:1.75;color:var(--muted);font-size:16px;}
   .article-body h2{margin:40px 0 14px;font-size:24px;color:var(--ink);}
   .article-body ul{margin:0 0 20px;padding-left:22px;}
